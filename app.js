@@ -1,6 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
-const uuid = require('uuid')
+const uuid = require("uuid");
 
 const app = express();
 
@@ -24,15 +24,30 @@ app.use((req, res, next) => {
     next()
 }) */
 const blogs = [
-  { id: 1, title: "Primer Blog", resume: "Resumen del primer blog" , body: "dfgsdfgñiijasdkfj "},
-  { id: 2, title: "Segundo Blog", resume: "Resumen del segundo blog",body: "dfgsdfgñiijasdkfj " },
-  { id: 3, title: "Tercero Blog", resume: "Resumen del tercero blog",body: "dfgsdfgñiijasdkfj " }
+  {
+    id: 1,
+    title: "Primer Blog",
+    resume: "Resumen del primer blog",
+    body: "dfgsdfgñiijasdkfj ",
+  },
+  {
+    id: 2,
+    title: "Segundo Blog",
+    resume: "Resumen del segundo blog",
+    body: "dfgsdfgñiijasdkfj ",
+  },
+  {
+    id: 3,
+    title: "Tercero Blog",
+    resume: "Resumen del tercero blog",
+    body: "dfgsdfgñiijasdkfj ",
+  },
 ];
 
 app.use(morgan("tiny"));
 
 app.use(express.static("public"));
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: true }));
 
 app.get(
   "/",
@@ -42,13 +57,13 @@ app.get(
 );
 
 app.post("/", (req, res) => {
-    // console.log(req.body)
-    // res.send("Formulario recibido..")
-    // {title: "Tercero Blog", resume: "Resumen",body: "dfg" }
-    const blog = {id: uuid.v4(), ...req.body};
-    blogs.push(blog)
-    console.log(blogs)
-    res.redirect('/')
+  // console.log(req.body)
+  // res.send("Formulario recibido..")
+  // {title: "Tercero Blog", resume: "Resumen",body: "dfg" }
+  const blog = { id: uuid.v4(), ...req.body };
+  blogs.push(blog);
+  console.log(blogs);
+  res.redirect("/");
 });
 
 app.get("/about", (req, res) => {
@@ -60,12 +75,12 @@ app.get("/blog/create", (req, res) => {
 });
 
 app.get("/blog/:id", (req, res) => {
-    console.log(req.params.id)
-//buscar si existe un blog con el id 
-//si es asi enviamos un arespuesta con el blog
-//sinó renderizamos el 404
-  });
-  
+  console.log(req.params.id);
+  //buscar si existe un blog con el id
+  //si es asi enviamos un arespuesta con el blog
+  //sinó renderizamos el 404
+  res.send();
+});
 
 app.use((req, res) => {
   res.status(404).render("404", { title: "404" });
