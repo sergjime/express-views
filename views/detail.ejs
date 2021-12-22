@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+      <div class="content not-found">
+        <table>
+          <tr>
+            <th>Título</th>
+            <th>Resumen</th>
+            <th>Contenido</th>
+          </tr>
+          <tr>
+            <td>
+              <%= blog.title %>
+            </td>
+            <td>
+              <%= blog.resume %>
+            </td>
+            <td>
+              <%= blog.body %>
+            </td>
+          </tr>
+        </table>
+        <a data-id="<%= blog.id %>" class="delete">Eliminar</a>
+      </div>
+      <%- include("./partials/footer.ejs") %>
+  </body>
+  <script src="/js/script-delete.js"></script>
+
+</html>
