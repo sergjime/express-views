@@ -1,4 +1,4 @@
-const blogs = require("../models/blogs");
+const blogs = require("../models/Blog");
 const uuid = require("uuid");
 
 const blog_index = (req, res) => {
@@ -20,10 +20,24 @@ const blog_create_post = (req, res) => {
   res.redirect("/");
 };
 
+const blog_update_get = (req, res) => {
+  const blog = blogs.find((blog) => blog.id == req.params.id);
+  res.render("update", { title: `Editar el blog: (${blog.title})`, blog });
+};
+
+const blog_update_post = (req, res) => {
+  blogs.forEach((blog, index) => {
+    if (blog.id == req.params.id) {
+      blogs[index] = { id: blog.id, ...req.body };
+    }
+  });
+  res.redirect(`/blog/${req.params.id}`);
+};
+
 const blog_delete = (req, res) => {
   blogs.forEach((blog, index) => {
     if (blog.id == req.params.id) {
-      blogs.slice(index, 1);
+      blogs.splice(index, 1);
     }
   });
   res.json({ redirect: "/" });
@@ -35,5 +49,7 @@ module.exports = {
   blog_details,
   blog_create_get,
   blog_create_post,
+  blog_update_get,
+  blog_update_post,
   blog_delete,
 };
