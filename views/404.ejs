@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include("./partials/head.ejs") %>
+<%- include("./partials/head.ejs") %>
+
   <body>
     <%- include("./partials/nav.ejs") %>
 
-    <div class="content not-found">
-      <p>OOPS, página no encontrada :)</p>
-    </div>
-    <%- include("./partials/footer.ejs") %>
+      <div class="content not-found">
+        <p>OOPS, página no encontrada :)</p>
+      </div>
+      <br><br><br>
+      <a href="/">VOLVER AL INICIO</a>
+      <%- include("./partials/footer.ejs") %>
   </body>
+
 </html>

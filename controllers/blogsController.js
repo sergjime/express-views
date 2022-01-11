@@ -1,13 +1,23 @@
-const blogs = require("../models/Blog");
-const uuid = require("uuid");
+const Blog = require("../models/Blog");
 
 const blog_index = (req, res) => {
-  res.render("index", { title: "Inicio", blogs });
+  Blog.find()
+    .then((result) => res.render("index", { title: "Inicio", blogs: result }))
+    .catch((err) => console.log(err));
 };
 
 const blog_details = (req, res) => {
-  const blog = blogs.find((blog) => blog.id == req.params.id);
-  res.render("detail", { title: `Detalle del blog: (${blog.title})`, blog });
+  Blog.findById(req.params.id)
+    .then((result) =>
+      res.render("detail", {
+        title: `Detalle del blog: (${result.title})`,
+        blog: result,
+      })
+    )
+    .catch((err) => {
+      console.log(err)
+      res.render("404", { title: "Blog no encontrado" });
+  })
 };
 
 const blog_create_get = (req, res) => {
@@ -15,33 +25,35 @@ const blog_create_get = (req, res) => {
 };
 
 const blog_create_post = (req, res) => {
-  const blog = { id: uuid.v4(), ...req.body };
-  blogs.push(blog);
-  res.redirect("/");
+  const blog = new Blog(req.body);
+  blog
+    .save()
+    .then((result) => {
+      console.log("Registro guardado", result);
+      res.redirect("/");
+    })
+    .catch((err) => console.log(err));
 };
 
 const blog_update_get = (req, res) => {
-  const blog = blogs.find((blog) => blog.id == req.params.id);
-  res.render("update", { title: `Editar el blog: (${blog.title})`, blog });
+  Blog.findById(req.params.id).then((result) =>
+    res.render("update", {
+      title: `Editar el blog: (${result.title})`,
+      blog: result,
+    })
+  );
 };
 
 const blog_update_post = (req, res) => {
-  blogs.forEach((blog, index) => {
-    if (blog.id == req.params.id) {
-      blogs[index] = { id: blog.id, ...req.body };
-    }
-  });
-  res.redirect(`/blog/${req.params.id}`);
+  Blog.updateOne(req.body)
+    .then(res.redirect(`/blog/${req.params.id}`))
+    .catch((err) => console.log(err));
 };
 
 const blog_delete = (req, res) => {
-  blogs.forEach((blog, index) => {
-    if (blog.id == req.params.id) {
-      blogs.splice(index, 1);
-    }
-  });
-  res.json({ redirect: "/" });
-  res.send(`Elemento eleminado: ${req.params.id}`);
+  Blog.findByIdAndDelete(req.params.id)
+    .then(res.json({ redirect: "/" }))
+    .catch((err) => console.log(err));
 };
 
 module.exports = {

@@ -1,11 +1,19 @@
+require("dotenv").config();
 const express = require("express");
+const mongoose = require("mongoose");
 const morgan = require("morgan");
 const blogsRoutes = require("./routes/blogsRoutes");
 const blogsController = require("./controllers/blogsController");
+const PORT = process.env.PORT || 3000;
 const app = express();
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("Servidor arrancado ok!"));
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Conectado a Atlas");
+    app.listen(PORT, () => console.log("Servidor arrancado ok!"));
+  })
+  .catch((err) => console.log(err));
 
 app.set("view engine", "ejs");
 
