@@ -25,6 +25,9 @@ p {
   margin: 0 0 10px 0;
 }
 
+.card {
+  display: inline-block;
+}
 /* nav & footer */
 
 nav {
@@ -63,8 +66,17 @@ footer {
   margin: 80px auto 20px;
 }
 
+.cards {
+  width: 20rem;
+  display: flex;
+  align-items: baseline;
+  align-content: center;
+  justify-content: center;
+}
+
 /* content class */
 .content {
+  display: flex;
   margin-left: 20px;
 }
 
