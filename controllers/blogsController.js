@@ -15,9 +15,9 @@ const blog_details = (req, res) => {
       })
     )
     .catch((err) => {
-      console.log(err)
+      console.log(err);
       res.render("404", { title: "Blog no encontrado" });
-  })
+    });
 };
 
 const blog_create_get = (req, res) => {
@@ -45,8 +45,8 @@ const blog_update_get = (req, res) => {
 };
 
 const blog_update_post = (req, res) => {
-  Blog.updateOne(req.body)
-    .then(res.redirect(`/blog/${req.params.id}`))
+  Blog.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => res.redirect("/blog/" + req.params.id))
     .catch((err) => console.log(err));
 };
 
