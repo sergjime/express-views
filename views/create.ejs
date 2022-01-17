@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
-    <%- include("./partials/head.ejs") %>
-<body>
-    <%- include("./partials/nav.ejs") %>
+  <%- include("./partials/head.ejs") %>
 
-    <div class="content create-blog">
-       <form method="post" action="/blog">
-           <label for="title">Título</label>
-           <input type="text" name="title" id="title" required>
-           <label for="resume">Resumen</label>
-           <input type="text" name="resume" id="resume" required>
-           <label for="body">Contenido</label>
-           <textarea name="body" id="body"></textarea>
-           <button type="submit">Crear Nuevo</button>
-       </form>
+  <body>
+    <div class="container mt-3">
+      <%- include("./partials/nav.ejs") %>
+
+      <div class="create-form">
+        <form method="post" action="/blog">
+          <div class="mb-3">
+            <label for="title" class="form-label">Título</label>
+            <input
+              type="text"
+              class="form-control"
+              name="title"
+              id="title"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="resume" class="form-label">Resumen</label>
+            <input
+              type="text"
+              class="form-control"
+              name="resume"
+              id="resume"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="body" class="form-label">Contenido</label>
+            <textarea
+              class="form-control"
+              name="body"
+              id="body"
+              rows="3"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">
+            Crear nuevo blog
+          </button>
+        </form>
+      </div>
+      <%- include("./partials/footer.ejs") %>
     </div>
-    <%- include("./partials/footer.ejs") %>
-</body>
+  </body>
 </html>

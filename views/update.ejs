@@ -1,20 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-    <%- include("./partials/head.ejs") %>
-<body>
-    <%- include("./partials/nav.ejs") %>
+  <%- include("./partials/head.ejs") %>
 
-    <div class="content update-blog">
-       <form method="post" action="/blog/update/<%= blog.id %>">
-           <label for="title">Título</label>
-           <input type="text" name="title" id="title" value="<%= blog.title %>" required>
-           <label for="resume">Resumen</label>
-           <input type="text" name="resume" id="resume" value="<%= blog.resume %>" required>
-           <label for="body">Contenido</label>
-           <textarea name="body" id="body"><%= blog.body %></textarea>
-           <button type="submit">Actualizar blog</button>
-       </form>
+  <body>
+    <div class="container mt-4">
+      <%- include("./partials/nav.ejs") %>
+      <div class="update-form">
+        <form method="post" action="/blog/update/<%= blog.id %>">
+          <div class="mb-3">
+            <label for="title" class="form-label">Título</label>
+            <input
+              type="text"
+              class="form-control"
+              name="title"
+              id="title"
+              value="<%= blog.title %>"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="resume" class="form-label">Resumen</label>
+            <input
+              type="text"
+              class="form-control"
+              name="resume"
+              id="resume"
+              value="<%= blog.resume %>"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="body" class="form-label">Contenido</label>
+            <textarea class="form-control" name="body" id="body" rows="3">
+          <%= blog.body %>"</textarea
+            >
+          </div>
+          <button type="submit" class="btn btn-warning">Actualizar blog</button>
+        </form>
+      </div>
+      <%- include("./partials/footer.ejs") %>
     </div>
-    <%- include("./partials/footer.ejs") %>
-</body>
+  </body>
 </html>

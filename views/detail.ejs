@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include("./partials/head.ejs") %>
+  <%- include("./partials/head.ejs") %>
 
   <body>
-    <%- include("./partials/nav.ejs") %>
-
-      <div class="content not-found">
-        <table>
-          <tr>
-            <th>Título</th>
-            <th>Resumen</th>
-            <th>Contenido</th>
-          </tr>
-          <tr>
-            <td>
-              <%= blog.title %>
-            </td>
-            <td>
-              <%= blog.resume %>
-            </td>
-            <td>
-              <%= blog.body %>
-            </td>
-          </tr>
+    <div class="container mt-4">
+      <%- include("./partials/nav.ejs") %>
+      <div class="content table-responsive">
+        <table class="table table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th>Título</th>
+              <th>Resumen</th>
+              <th>Contenido</th>
+              <th class="actions">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= blog.title %></td>
+              <td><%= blog.resume %></td>
+              <td class="body"><%= blog.body %></td>
+              <td class="icons">
+                <button class="btn btn-warning"><a href="/blog/update/<%= blog.id %>"><i class="text-white icon icon-pencil"></i></a></button>
+                <button class="btn btn-danger"><a data-id="<%= blog.id %>"><i class="text-white icon icon-bin"></i></a></button>
+              </td>
+            </tr>
+          </tbody>
         </table>
-        <a data-id="<%= blog.id %>" class="delete">Eliminar</a>
-        <a href="/blog/update/<%= blog.id %>" class="update">Actualizar</a>
       </div>
       <%- include("./partials/footer.ejs") %>
-      <script src="/js/script-delete.js"></script>
+    </div>
+    <script src="/js/script-delete.js"></script>
   </body>
-
 </html>
