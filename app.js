@@ -11,7 +11,7 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Conectado a Atlas");
-    app.listen(PORT, () => console.log("Servidor arrancado ok!"));
+    app.listen(PORT, () => console.log(`Servidor arrancado ok en => http://localhost:${PORT}`));
   })
   .catch((err) => console.log(err));
 
